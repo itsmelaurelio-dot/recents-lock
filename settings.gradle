@@ -1,0 +1,21 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        // Xposed API tidak ada di Maven Central; hanya group ini yang diambil dari sini
+        maven {
+            url 'https://api.xposed.info/'
+            content { includeGroup 'de.robv.android.xposed' }
+        }
+    }
+}
+rootProject.name = 'RecentsLock'
+include ':app'

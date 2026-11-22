@@ -1,0 +1,53 @@
+plugins {
+    id 'com.android.application'
+}
+
+// Dipakai CI: keystore diambil dari GitHub Secrets (tidak pernah ada di repo)
+def ksPath = System.getenv('KEYSTORE_PATH')
+
+android {
+    namespace 'com.recentslock.module'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.recentslock.module'
+        minSdk 29
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+
+    signingConfigs {
+        if (ksPath) {
+            release {
+                storeFile file(ksPath)
+                storePassword System.getenv('KEYSTORE_PASSWORD')
+                keyAlias System.getenv('KEY_ALIAS')
+                keyPassword System.getenv('KEY_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            // Tanpa keystore (build lokal) -> pakai debug key supaya tetap bisa dipasang
+            signingConfig ksPath ? signingConfigs.getByName('release') : signingConfigs.getByName('debug')
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+
+dependencies {
+    // WAJIB compileOnly: API Xposed disediakan oleh LSPosed saat runtime
+    compileOnly 'de.robv.android.xposed:api:82'
+}

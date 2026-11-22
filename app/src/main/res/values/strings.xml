@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Recents Lock</string>
+    <string name="xposed_description">Kunci app terpilih di recent apps: tidak hilang saat Hapus semua atau ter-swipe.</string>
+</resources>

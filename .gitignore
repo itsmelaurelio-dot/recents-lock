@@ -1,0 +1,30 @@
+# Kunci & rahasia - JANGAN PERNAH di-commit
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.key
+*.pass
+keystore.properties
+signing.properties
+.env
+.env.*
+secrets/
+
+# Build & IDE
+.gradle/
+build/
+local.properties
+*.apk
+*.aab
+*.apks
+.idea/
+*.iml
+captures/
+.cxx/
+.externalNativeBuild/
+
+# Termux / sistem
+*.log
+.DS_Store
